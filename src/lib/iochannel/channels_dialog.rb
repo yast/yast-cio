@@ -42,6 +42,8 @@ module IOChannel
       case input
       when :ok, :cancel
         return input
+      when :filter_text
+        Yast::UI.ChangeWidget(Id(:channels_table), :Items, channels_items)
       else
         raise "Unknown action #{input}"
       end
@@ -50,8 +52,11 @@ module IOChannel
     def dialog_content
       VBox(
         headings,
-        channels_table,
-        buttons
+        HBox(
+          channels_table,
+          action_buttons
+        ),
+        ending_buttons
       )
     end
 
@@ -61,13 +66,14 @@ module IOChannel
 
     def channels_table
       Table(
+        Id(:channels_table),
         Header(_("Device"), _("Used")),
         channels_items
       )
     end
 
     def channels_items
-      @channels.map do |channel|
+      prefiltered_channels.map do |channel|
         Item(
           Id(channel.device),
           channel.device,
@@ -76,7 +82,24 @@ module IOChannel
       end
     end
 
-    def buttons
+    def prefiltered_channels
+      filter = Yast::UI.QueryWidget(Id(:filter_text), :Value)
+
+      return @channels if !filter || filter.empty?
+
+      @channels.select do |channel|
+        channel.include? filter
+      end
+    end
+
+    def action_buttons
+      VBox(
+        TextEntry(Id(:filter_text), Opt(:notify),""),
+#        PushButton(Id(:confirm_filter), _("&Confirm Filter"))
+      )
+    end
+
+    def ending_buttons
       PushButton(Id(:ok), _("&OK"))
     end
   end

@@ -8,10 +8,16 @@ require "iochannel/channel"
 module IOChannel
   class Channels
     extend Forwardable
+    def_delegators :@channels, :size, :map
+
     BASH_SCR_PATH = Yast::Path.new(".target.bash_output")
 
     def initialize channels=[]
       @channels = channels
+    end
+
+    def select *args, &block
+      Channels.new @channels.select(*args,&block)
     end
 
     def self.allowed
@@ -20,8 +26,6 @@ module IOChannel
 
       Channels.new parse_lscss_output(result["stdout"])
     end
-
-    def_delegators :@channels, :size, :map
 
   private
     def self.parse_lscss_output output
