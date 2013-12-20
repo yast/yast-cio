@@ -1,0 +1,6 @@
+#! /bin/sh
+
+curdir=`dirname $0`
+Y2DIR=$curdir/../src \
+PATH=$PATH:$curdir/bin \
+/sbin/yast2 cio
