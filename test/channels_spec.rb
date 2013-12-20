@@ -1,6 +1,6 @@
 #! rspec
 
-$:.unshift(File.expand_path("../../src/lib", __FILE__))
+require_relative "spec_helper"
 
 require "iochannel/channels"
 

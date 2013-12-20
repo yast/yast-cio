@@ -1,6 +1,8 @@
 #! rspec
 
-require_relative "../src/lib/iochannel/channel"
+require_relative "spec_helper"
+
+require "iochannel/channel"
 
 describe IOChannel::Channel do
   def channel overwritten_params={}

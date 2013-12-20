@@ -1,3 +1,5 @@
+require "forwardable"
+
 require "yast/scr"
 require "yast/path"
 
@@ -5,6 +7,7 @@ require "iochannel/channel"
 
 module IOChannel
   class Channels
+    extend Forwardable
     BASH_SCR_PATH = Yast::Path.new(".target.bash_output")
 
     def initialize channels=[]
@@ -18,9 +21,7 @@ module IOChannel
       Channels.new parse_lscss_output(result["stdout"])
     end
 
-    def size
-      @channels.size
-    end
+    def_delegators :@channels, :size, :map
 
   private
     def self.parse_lscss_output output
