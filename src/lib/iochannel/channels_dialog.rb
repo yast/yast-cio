@@ -38,14 +38,16 @@ module IOChannel
     end
 
     def controller_loop
-      input = Yast::UI.UserInput
-      case input
-      when :ok, :cancel
-        return input
-      when :filter_text
-        Yast::UI.ChangeWidget(Id(:channels_table), :Items, channels_items)
-      else
-        raise "Unknown action #{input}"
+      while true do
+        input = Yast::UI.UserInput
+        case input
+        when :ok, :cancel
+          return input
+        when :filter_text
+          Yast::UI.ChangeWidget(Id(:channels_table), :Items, channels_items)
+        else
+          raise "Unknown action #{input}"
+        end
       end
     end
 
@@ -88,13 +90,13 @@ module IOChannel
       return @channels if !filter || filter.empty?
 
       @channels.select do |channel|
-        channel.include? filter
+        channel.device.include? filter
       end
     end
 
     def action_buttons
       VBox(
-        TextEntry(Id(:filter_text), Opt(:notify),""),
+        InputField(Id(:filter_text), Opt(:notify),""),
 #        PushButton(Id(:confirm_filter), _("&Confirm Filter"))
       )
     end
