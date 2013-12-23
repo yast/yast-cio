@@ -42,9 +42,13 @@ module IOChannel
         input = Yast::UI.UserInput
         case input
         when :ok, :cancel
-          return input
+          return :ok
         when :filter_text
-          Yast::UI.ChangeWidget(Id(:channels_table), :Items, channels_items)
+          Yast::UI.ChangeWidget(:channels_table, :Items, channels_items)
+        when :clear
+          Yast::UI.ChangeWidget(:channels_table, :SelectedItems, [])
+        when :select_all
+          Yast::UI.ChangeWidget(:channels_table, :SelectedItems, prefiltered_channels.map(&:device))
         else
           raise "Unknown action #{input}"
         end
@@ -86,7 +90,7 @@ module IOChannel
     end
 
     def prefiltered_channels
-      filter = Yast::UI.QueryWidget(Id(:filter_text), :Value)
+      filter = Yast::UI.QueryWidget(:filter_text, :Value)
 
       return @channels if !filter || filter.empty?
 
@@ -97,13 +101,15 @@ module IOChannel
 
     def action_buttons
       VBox(
+        Label(_("Filter channels")),
         InputField(Id(:filter_text), Opt(:notify),""),
-#        PushButton(Id(:confirm_filter), _("&Confirm Filter"))
+        PushButton(Id(:select_all), _("&Select All")),
+        PushButton(Id(:clear), _("&Clear selection"))
       )
     end
 
     def ending_buttons
-      PushButton(Id(:ok), _("&OK"))
+      PushButton(Id(:ok), _("&Exit"))
     end
   end
 end
