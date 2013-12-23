@@ -69,6 +69,7 @@ module IOChannel
     def channels_table
       Table(
         Id(:channels_table),
+        Opt(:multiSelection),
         Header(_("Device"), _("Used")),
         channels_items
       )
