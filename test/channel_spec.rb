@@ -7,7 +7,7 @@ require "iochannel/channel"
 describe IOChannel::Channel do
   def channel overwritten_params={}
     values = {
-      :used => false,
+      :used   => false,
       :device => "0.0.0600"
     }
     values.merge!(overwritten_params)
