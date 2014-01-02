@@ -27,16 +27,16 @@ describe IOChannel::ChannelsDialog do
     ui = double("Yast::UI")
     stub_const("Yast::UI", ui)
 
-    ui.should_receive(:OpenDialog).
+    expect(ui).to receive(:OpenDialog).
       and_return(true)
 
-    ui.should_receive(:CloseDialog).
+    expect(ui).to receive(:CloseDialog).
       and_return(true)
 
-    ui.should_receive(:UserInput).
+    expect(ui).to receive(:UserInput).
       and_return(*data[:input])
 
-    ui.should_receive(:QueryWidget).
+    expect(ui).to receive(:QueryWidget).
       with(:filter_text, :Value).
       at_least(:once).
       and_return(data[:filter])
@@ -46,14 +46,14 @@ describe IOChannel::ChannelsDialog do
     mock_success_lscss
     mock_dialog :input => :ok
 
-    expect(IOChannel::ChannelsDialog.run).to be == :ok
+    expect(IOChannel::ChannelsDialog.run).to eq :ok
   end
 
   it "return :ok if user close window" do
     mock_success_lscss
     mock_dialog :input => :cancel
 
-    expect(IOChannel::ChannelsDialog.run).to be == :ok
+    expect(IOChannel::ChannelsDialog.run).to eq :ok
   end
 
   it "deselect all items in table after click on Clear Selection" do
@@ -71,8 +71,8 @@ describe IOChannel::ChannelsDialog do
     mock_dialog :input => [:select_all, :ok]
 
     Yast::UI.should_receive(:ChangeWidget) do |id, attr, value|
-      expect(id).to be == :channels_table
-      expect(attr).to be == :SelectedItems
+      expect(id).to eq :channels_table
+      expect(attr).to eq :SelectedItems
       expect(value.size).to be > 2 # non trivial size but do not tight it with test data
     end
 
