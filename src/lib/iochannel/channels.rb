@@ -33,9 +33,9 @@ module IOChannel
       lines = lines[2..-1] #remove header and separator
       return [] unless lines
 
-      lines.map do |l|
-        device = l[/^[\h.]+/]
-        used = l.include?("yes")
+      lines.map do |line|
+        device = line[/^[\h.]+/]
+        used = line.include?("yes")
         Channel.new(device, used)
       end
     end
