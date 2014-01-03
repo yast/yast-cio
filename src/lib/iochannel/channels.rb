@@ -27,6 +27,13 @@ module IOChannel
       Channels.new parse_lscss_output(result["stdout"])
     end
 
+    def block
+      cmd = "cio_ignore -a #{@channels.map(&:device).join(",")}"
+
+      result = Yast::SCR.Execute(BASH_SCR_PATH, cmd)
+      raise "Calling cio_ignore failed with #{result["stderr"]}" unless result["exit"].zero?
+    end
+
   private
     def self.parse_lscss_output output
       lines = output.split("\n")

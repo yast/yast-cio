@@ -13,7 +13,7 @@ module IOChannel
     end
 
     def initialize
-      @channels = Channels.allowed
+      read_channels
     end
 
     def run
@@ -37,6 +37,14 @@ module IOChannel
       Yast::UI.CloseDialog
     end
 
+    def read_channels
+      @channels = Channels.allowed
+    end
+
+    def redraw_channels
+      Yast::UI.ChangeWidget(:channels_table, :Items, channels_items)
+    end
+
     def controller_loop
       while true do
         input = Yast::UI.UserInput
@@ -44,15 +52,25 @@ module IOChannel
         when :ok, :cancel
           return :ok
         when :filter_text
-          Yast::UI.ChangeWidget(:channels_table, :Items, channels_items)
+          redraw_channels
         when :clear
           Yast::UI.ChangeWidget(:channels_table, :SelectedItems, [])
         when :select_all
           Yast::UI.ChangeWidget(:channels_table, :SelectedItems, prefiltered_channels.map(&:device))
+        when :block
+          block_channels
+          read_channels
+          redraw_channels
         else
           raise "Unknown action #{input}"
         end
       end
+    end
+
+    def block_channels
+      devices = Yast::UI.QueryWidget(:channels_table, :SelectedItems)
+      channels = Channels.new(devices.map {|d| Channel.new(d) })
+      channels.block
     end
 
     def dialog_content
@@ -104,7 +122,8 @@ module IOChannel
         Label(_("Filter channels")),
         InputField(Id(:filter_text), Opt(:notify),""),
         PushButton(Id(:select_all), _("&Select All")),
-        PushButton(Id(:clear), _("&Clear selection"))
+        PushButton(Id(:clear), _("&Clear selection")),
+        PushButton(Id(:block), _("&Blacklist Selected Channels")),
       )
     end
 
