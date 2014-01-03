@@ -1,3 +1,12 @@
 #! /usr/bin/ruby
 
-puts File.read File.expand_path("../../../test/data/lscss.txt", __FILE__)
+require "fileutils"
+
+orig_dir = File.expand_path("../../data", __FILE__)
+data_file = "#{orig_dir}/lscss.output"
+
+if !File.exists? data_file
+  FileUtils.cp "#{orig_dir}/lscss.output.orig", data_file
+end
+
+puts File.read data_file
