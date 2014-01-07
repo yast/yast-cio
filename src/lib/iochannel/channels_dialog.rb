@@ -1,4 +1,5 @@
 require "iochannel/channels"
+require "iochannel/unban_dialog"
 require "yast"
 
 module IOChannel
@@ -61,6 +62,8 @@ module IOChannel
           block_channels
           read_channels
           redraw_channels
+        when :unban
+          UnbanDialog.run
         else
           raise "Unknown action #{input}"
         end
@@ -124,6 +127,7 @@ module IOChannel
         PushButton(Id(:select_all), _("&Select All")),
         PushButton(Id(:clear), _("&Clear selection")),
         PushButton(Id(:block), _("&Blacklist Selected Channels")),
+        PushButton(Id(:unban), _("&Unban Channels")),
       )
     end
 
