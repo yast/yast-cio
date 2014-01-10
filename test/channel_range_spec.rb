@@ -11,6 +11,16 @@ describe IOChannel::ChannelRange do
       expect(range.matching_channels).to eq ["0.0.0100"]
     end
 
+    it "is not case sensitive" do
+      range = IOChannel::ChannelRange.from_string "0.0.0aAf"
+      expect(range.matching_channels).to eq ["0.0.0aaf"]
+    end
+
+    it "ignores all spaces" do
+      range = IOChannel::ChannelRange.from_string "0.0.0001, 0.0.0002"
+      expect(range.matching_channels).to match_array(["0.0.0001","0.0.0002"])
+    end
+
     it "returns range if partial channel passed" do
       range = IOChannel::ChannelRange.from_string "100"
       expect(range.matching_channels).to eq ["0.0.0100"]
@@ -22,7 +32,7 @@ describe IOChannel::ChannelRange do
     end
 
     it "returns range if range of channels with partial part passed" do
-      range = IOChannel::ChannelRange.from_string "0.0.0100-102"
+      range = IOChannel::ChannelRange.from_string "0.0.0100-2"
       expect(range.matching_channels).to eq ["0.0.0100","0.0.0101","0.0.0102"]
       range = IOChannel::ChannelRange.from_string "100-102"
       expect(range.matching_channels).to eq ["0.0.0100","0.0.0101","0.0.0102"]
@@ -31,6 +41,8 @@ describe IOChannel::ChannelRange do
     it "returns range if list of ranges passed" do
       range = IOChannel::ChannelRange.from_string "0.0.0100,50,0.0.0100-0.0.0102"
       expect(range.matching_channels).to match_array(["0.0.0100","0.0.0050","0.0.0101","0.0.0102"])
+      range = IOChannel::ChannelRange.from_string "0.0.0001,0.0.0100-102"
+      expect(range.matching_channels).to match_array(["0.0.0001","0.0.0100","0.0.0101","0.0.0102"])
     end
 
     it "raises InvalidRangeValue exception if invalid range is passed" do

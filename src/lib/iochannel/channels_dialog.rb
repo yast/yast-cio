@@ -63,7 +63,13 @@ module IOChannel
           read_channels
           redraw_channels
         when :unban
-          UnbanDialog.run
+          devices = UnbanDialog.run
+          Yast.y2milestone("Going to unblock devices #{devices.inspect}")
+          next unless devices
+
+          unban_channels devices
+          read_channels
+          redraw_channels
         else
           raise "Unknown action #{input}"
         end
@@ -73,7 +79,14 @@ module IOChannel
     def block_channels
       devices = Yast::UI.QueryWidget(:channels_table, :SelectedItems)
       channels = Channels.new(devices.map {|d| Channel.new(d) })
+
+      Yast.y2milestone("Going to unblock channels #{channels.inspect}")
       channels.block
+    end
+
+    def unban_channels devices
+      channels = Channels.new(devices.map{ |c| Channel.new c })
+      channels.unblock
     end
 
     def dialog_content

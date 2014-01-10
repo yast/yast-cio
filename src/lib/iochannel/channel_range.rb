@@ -50,7 +50,7 @@ module IOChannel
     end
 
     class PartialValue < BaseValue
-      def initialize value, initial = "0.0.0000"
+      def initialize value, initial
         value_s = value_to_hex(value).to_s(16)
         case value_s.size
         when 1..4
@@ -72,7 +72,7 @@ module IOChannel
     class RangeValue < BaseValue
       def initialize first, second
         @start = value_to_hex(ChannelRange.from_string(first).matching_channels.first)
-        @end   = value_to_hex(ChannelRange.from_string(second).matching_channels.first)
+        @end   = value_to_hex(ChannelRange.from_string(second, first).matching_channels.first)
       end
 
       def matching_channels
@@ -90,7 +90,9 @@ module IOChannel
       end
     end
 
-    def self.from_string value
+    def self.from_string value, initial_hint = "0.0.0000"
+      value.downcase!
+      value.gsub!(/\s*/, "")
       case value
       when /,/
         ListValue.new value.split(",")
@@ -99,7 +101,7 @@ module IOChannel
       when /\A\h\.\h\.\h{4}\z/
         SimpleValue.new value
       when /\A(\h\.)?\h{1,4}\z/
-        PartialValue.new value
+        PartialValue.new value, initial_hint
       else
         raise InvalidRangeValue.new(value)
       end
