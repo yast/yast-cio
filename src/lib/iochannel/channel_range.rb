@@ -9,7 +9,37 @@ module IOChannel
   end
 
   module ChannelRange
-    class SimpleRange
+
+    class BaseValue
+
+      def matching_channels
+        raise "Internal Error: missing implementation"
+      end
+
+      protected
+        def value_to_hex value
+          value.delete(".").hex
+        end
+
+        def hex_to_value hex
+          hex_s = hex.to_s(16)
+          case hex_s.size
+          when 1..4
+            return "0.0.#{hex_s.rjust(4, "0")}"
+          when 5
+            return "0.#{hex_s[0]}.#{hex_s[1..4]}"
+          when 6
+            return "#{hex_s[0]}.#{hex_s[1]}.#{hex_s[2..5]}"
+          else
+            raise "Internal error: too big hex value"
+          end
+        end
+
+        def initialize
+        end
+    end
+
+    class SimpleValue < BaseValue
       def initialize value
         @value = value
       end
@@ -19,10 +49,9 @@ module IOChannel
       end
     end
 
-    class PartialRange
+    class PartialValue < BaseValue
       def initialize value, initial = "0.0.0000"
-        value_hex = value.delete(".").hex
-        value_s = value_hex.to_s(16)
+        value_s = value_to_hex(value).to_s(16)
         case value_s.size
         when 1..4
           # do nothing it is final format
@@ -40,12 +69,25 @@ module IOChannel
       end
     end
 
+    class RangeValue < BaseValue
+      def initialize first, second
+        @start = value_to_hex(ChannelRange.from_string(first).matching_channels.first)
+        @end   = value_to_hex(ChannelRange.from_string(second).matching_channels.first)
+      end
+
+      def matching_channels
+        (@start..@end).map { |hex| hex_to_value(hex) }
+      end
+    end
+
     def self.from_string value
       case value
+      when /\A([^-]+)-([^-]+)\z/
+        RangeValue.new $1, $2
       when /\A\h\.\h\.\h{4}\z/
-        SimpleRange.new value
+        SimpleValue.new value
       when /\A(\h\.)?\h{1,4}\z/
-        PartialRange.new value
+        PartialValue.new value
       else
         raise InvalidRangeValue.new(value)
       end

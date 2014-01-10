@@ -16,6 +16,18 @@ describe IOChannel::ChannelRange do
       expect(range.matching_channels).to eq ["0.0.0100"]
     end
 
+    it "returns range if range of channels passed" do
+      range = IOChannel::ChannelRange.from_string "0.0.0100-0.0.0102"
+      expect(range.matching_channels).to eq ["0.0.0100","0.0.0101","0.0.0102"]
+    end
+
+    it "returns range if range of channels with partial part passed" do
+      range = IOChannel::ChannelRange.from_string "0.0.0100-102"
+      expect(range.matching_channels).to eq ["0.0.0100","0.0.0101","0.0.0102"]
+      range = IOChannel::ChannelRange.from_string "100-102"
+      expect(range.matching_channels).to eq ["0.0.0100","0.0.0101","0.0.0102"]
+    end
+
     it "raises InvalidRangeValue exception if invalid range is passed" do
       expect{IOChannel::ChannelRange.from_string("invalid")}.to raise_error(IOChannel::InvalidRangeValue)
     end
