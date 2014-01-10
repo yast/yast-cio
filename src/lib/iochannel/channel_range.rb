@@ -80,8 +80,20 @@ module IOChannel
       end
     end
 
+    class ListValue < BaseValue
+      def initialize list
+        @list = list.map{ |v| ChannelRange.from_string(v) }
+      end
+
+      def matching_channels
+        @list.map(&:matching_channels).reduce(:+).uniq
+      end
+    end
+
     def self.from_string value
       case value
+      when /,/
+        ListValue.new value.split(",")
       when /\A([^-]+)-([^-]+)\z/
         RangeValue.new $1, $2
       when /\A\h\.\h\.\h{4}\z/
