@@ -144,6 +144,7 @@ module IOChannel
     def prefiltered_channels
       filter = Yast::UI.QueryWidget(:filter_text, :Value)
 
+      # filter can be empty if dialog is not yet created
       return @channels if !filter || filter.empty?
 
       @channels.select do |channel|
