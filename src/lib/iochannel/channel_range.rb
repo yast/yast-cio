@@ -52,9 +52,6 @@ module IOChannel
             raise "Internal error: too big hex value"
           end
         end
-
-        def initialize
-        end
     end
 
     class SimpleValue < BaseValue
