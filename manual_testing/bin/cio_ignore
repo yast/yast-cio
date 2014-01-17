@@ -1,3 +1,5 @@
+#! /usr/bin/ruby
+
 # Copyright (c) 2014 SUSE LLC.
 #  All Rights Reserved.
 
@@ -16,16 +18,32 @@
 #  To contact Novell about this file by physical or electronic mail,
 #  you may find current contact information at www.suse.com
 
-require "yast/rake"
 
-Yast::Tasks.configuration do |conf|
-  conf.skip_license_check << /lscss.output.*/
-  
-  conf.obs_api = "https://api.suse.de/"
-
-  conf.obs_project = "Devel:YaST:Head"
-
-  conf.obs_sr_project = "SUSE:Factory:Head:Internal"
-
-  conf.obs_target = "factory"
+if ARGV.size < 2
+  puts "Fake cio_ignore script with limited ability. Usage:
+  cio_ignore <-a|-r> <comma separated list of devices to add/remove>"
+  exit 1
 end
+
+devices = ARGV[1].split(",")
+
+ORIG_DIR = File.expand_path("../../data", __FILE__)
+TARGET_FILE = "#{ORIG_DIR}/lscss.output"
+lines = File.readlines TARGET_FILE
+lines.map!(&:strip)
+
+case ARGV[0]
+when "-a"
+  lines.delete_if { |l| devices.include?(l[/^[\h.]*/]) }
+when "-r"
+  srand
+  new_devices = devices.map do |dev|
+    "#{dev} 0.0.0020  1732/01 1731/01 #{((rand % 2) == 1) ? "yes" : "   "}  80  80  ff   21000000 00000000" #random values
+  end
+
+  lines.concat new_devices
+else
+  raise "wrong argument"
+end
+
+File.write TARGET_FILE, lines.join("\n")

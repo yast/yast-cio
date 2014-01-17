@@ -1,3 +1,4 @@
+#! rspec
 # Copyright (c) 2014 SUSE LLC.
 #  All Rights Reserved.
 
@@ -16,16 +17,36 @@
 #  To contact Novell about this file by physical or electronic mail,
 #  you may find current contact information at www.suse.com
 
-require "yast/rake"
 
-Yast::Tasks.configuration do |conf|
-  conf.skip_license_check << /lscss.output.*/
-  
-  conf.obs_api = "https://api.suse.de/"
+require_relative "spec_helper"
 
-  conf.obs_project = "Devel:YaST:Head"
+require "iochannel/channel"
 
-  conf.obs_sr_project = "SUSE:Factory:Head:Internal"
+describe IOChannel::Channel do
+  def channel overwritten_params={}
+    values = {
+      :used   => false,
+      :device => "0.0.0600"
+    }
+    values.merge!(overwritten_params)
 
-  conf.obs_target = "factory"
+    IOChannel::Channel.new values[:device], values[:used]
+  end
+
+  describe "#initialize" do
+    it "raises exception if device is nil" do
+      expect{channel(:device => nil)}.to raise_error
+    end
+  end
+
+  describe "#used?" do
+    it "returns true if channel is used" do
+      expect(channel(:used => true).used?).to be_true
+    end
+
+    it "returns false if channel is not used" do
+      expect(channel(:used => false).used?).to be_false
+    end
+
+  end
 end

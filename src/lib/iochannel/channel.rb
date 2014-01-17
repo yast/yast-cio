@@ -16,16 +16,14 @@
 #  To contact Novell about this file by physical or electronic mail,
 #  you may find current contact information at www.suse.com
 
-require "yast/rake"
+module IOChannel
+  class Channel < Struct.new(:device, :used)
+    def initialize device, used = false
+      raise "Each channel must have device" unless device
 
-Yast::Tasks.configuration do |conf|
-  conf.skip_license_check << /lscss.output.*/
-  
-  conf.obs_api = "https://api.suse.de/"
+      super
+    end
 
-  conf.obs_project = "Devel:YaST:Head"
-
-  conf.obs_sr_project = "SUSE:Factory:Head:Internal"
-
-  conf.obs_target = "factory"
+    alias_method :used?, :used
+  end
 end
