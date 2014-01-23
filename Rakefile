@@ -25,7 +25,7 @@ Yast::Tasks.configuration do |conf|
 
   conf.obs_project = "Devel:YaST:Head"
 
-  conf.obs_sr_project = "SLE:12:GA"
+  conf.obs_sr_project = "SUSE:SLE-12:GA"
 
   conf.obs_target = "factory"
 end
