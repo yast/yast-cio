@@ -27,5 +27,5 @@ Yast::Tasks.configuration do |conf|
 
   conf.obs_sr_project = "SUSE:SLE-12:GA"
 
-  conf.obs_target = "factory"
+  conf.obs_target = "SLE-12"
 end
