@@ -54,7 +54,6 @@ module IOChannel
 
     def unblock
       cmd = "cio_ignore -r #{@channels.map(&:device).join(",")}"
-      puts cmd
 
       result = Yast::SCR.Execute(BASH_SCR_PATH, cmd)
       raise "Calling cio_ignore failed with #{result["stderr"]}" unless result["exit"].zero?

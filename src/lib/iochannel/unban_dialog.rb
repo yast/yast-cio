@@ -62,7 +62,6 @@ module IOChannel
           rescue InvalidRangeValue => e
             invalid_range_message(e.value)
           else
-            puts range.inspect
             return range.matching_channels
           end
         when :cancel
