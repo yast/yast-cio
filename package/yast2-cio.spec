@@ -24,7 +24,7 @@
 ######################################################################
 
 Name:           yast2-cio
-Version:        3.1.0
+Version:        3.1.1
 Release:        0
 BuildArch:      noarch
 
@@ -65,5 +65,6 @@ rake install DESTDIR="%{buildroot}"
 %defattr(-,root,root)
 %{yast_dir}/clients/*.rb
 %{yast_dir}/lib/iochannel
+%{yast_desktopdir}/cio.desktop
 
 %doc COPYING
