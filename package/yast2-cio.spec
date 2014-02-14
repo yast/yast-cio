@@ -65,5 +65,6 @@ rake install DESTDIR="%{buildroot}"
 %defattr(-,root,root)
 %{yast_dir}/clients/*.rb
 %{yast_dir}/lib/iochannel
+%{yast_desktopdir}/cio.desktop
 
 %doc COPYING
