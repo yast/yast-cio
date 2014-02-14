@@ -20,6 +20,8 @@ require "yast/rake"
 
 Yast::Tasks.configuration do |conf|
   conf.skip_license_check << /lscss.output.*/
+  # desktop files are just metadata
+  conf.skip_license_check << /.*desktop$/
 
   conf.obs_api = "https://api.suse.de/"
 
