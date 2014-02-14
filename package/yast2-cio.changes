@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Feb 14 09:14:16 UTC 2014 - jreidinger@suse.com
+
+- Fix invalid STDOUT exception for debugging prints
+- Add desktop file
+- 3.1.1
+
+-------------------------------------------------------------------
 Thu Jan 16 15:21:02 UTC 2014 - jreidinger@suse.com
 
 - initial version (FATE#316579)
