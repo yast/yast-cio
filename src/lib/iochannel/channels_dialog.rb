@@ -28,13 +28,13 @@ module IOChannel
     def self.run
       Yast.import "UI"
 
-      textdomain "cio"
-
       dialog = ChannelsDialog.new
       dialog.run
     end
 
     def initialize
+      textdomain "cio"
+
       read_channels
     end
 
