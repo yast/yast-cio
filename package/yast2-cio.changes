@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Mar 24 10:36:59 UTC 2014 - jreidinger@suse.com
+
+- correctly set textdomain to get translated strings
+- 3.1.2
+
+-------------------------------------------------------------------
 Fri Feb 14 09:14:16 UTC 2014 - jreidinger@suse.com
 
 - Fix invalid STDOUT exception for debugging prints

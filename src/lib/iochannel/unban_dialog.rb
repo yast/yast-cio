@@ -28,6 +28,9 @@ module IOChannel
     def self.run
       Yast.import "UI"
       Yast.import "Label"
+
+      textdomain "cio"
+
       dialog = UnbanDialog.new
       dialog.run
     end
