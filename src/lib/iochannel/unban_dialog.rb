@@ -76,6 +76,7 @@ module IOChannel
     end
 
     def invalid_range_message value
+      # TRANSLATORS: %s stands for the smallest snippet inside which we detect syntax error
       msg = _("Specified range is invalid. Wrong value is inside snippet '%s'") % value
       widget = Label(msg)
       Yast::UI.ReplaceWidget(:message, widget)
@@ -106,7 +107,7 @@ module IOChannel
           "Range can be channel, part of channel which will be filled to zero or range specified with dash.\n"+
           "Example value: 0.0.0001, AA00, 0.1.0100-200")),
         ReplacePoint(Id(:message), Empty()),
-        InputField(Id(:channel_range), _("Ranges to unban."), "")
+        InputField(Id(:channel_range), _("Ranges to Unban."), "")
       ]
     end
   end
