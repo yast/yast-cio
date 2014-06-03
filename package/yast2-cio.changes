@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun  3 14:56:15 UTC 2014 - jreidinger@suse.com
+
+- fix crash in unban dialog
+- 3.1.4
+
+-------------------------------------------------------------------
 Tue Mar 25 15:47:33 UTC 2014 - jreidinger@suse.com
 
 - mark properly string to translation
