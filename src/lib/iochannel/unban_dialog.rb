@@ -29,13 +29,13 @@ module IOChannel
       Yast.import "UI"
       Yast.import "Label"
 
-      textdomain "cio"
-
       dialog = UnbanDialog.new
       dialog.run
     end
 
     def run
+      textdomain "cio"
+
       raise "Failed to create dialog" unless create_dialog
 
       begin
