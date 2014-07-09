@@ -1,7 +1,5 @@
 source "https://rubygems.org"
 
-gem "suse-connect", :github => "SUSE/connect"
-
 group :test do
   gem "rake"
   gem "rspec"
