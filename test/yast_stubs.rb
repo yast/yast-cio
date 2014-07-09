@@ -24,14 +24,36 @@ module Yast
   module I18n
     def textdomain dom
     end
+
+    def _(s)
+      s
+    end
   end
   def self.import(mod)
     true
+  end
+
+  module UIShortcuts
+    def HBox(*);       end
+    def Header(*);     end
+    def Heading(*);    end
+    def Id(*);         end
+    def InputField(*); end
+    def Item(*);       end
+    def Label(*);      end
+    def Opt(*);        end
+    def PushButton(*); end
+    def Table(*);      end
+    def VBox(*);       end
+  end
+
+  class Term
+    def initialize(*); end
   end
 end
 
 def stub_yast_require
   # stub require "yast" only, leave the other requires
   Object.any_instance.stub(:require).and_call_original
-  Object.any_instance.stub(:require).with("yast")
+  Object.any_instance.stub(:require).with(/^yast/)
 end
