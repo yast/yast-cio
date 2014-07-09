@@ -47,6 +47,11 @@ module Yast
     def VBox(*);       end
   end
 
+  Path = Struct.new(:path)
+
+  class SCR
+  end
+
   class Term
     def initialize(*); end
   end
