@@ -24,7 +24,7 @@
 ######################################################################
 
 Name:           yast2-cio
-Version:        3.1.4
+Version:        3.1.5
 Release:        0
 BuildArch:      noarch
 
@@ -40,9 +40,9 @@ BuildRequires:  yast2-ruby-bindings >= 1.2.0
 BuildRequires:  yast2-devtools >= 1.2.0
 BuildRequires:  yast2 >= 3.0.5
 #for install task
-BuildRequires:  rubygem-yast-rake
+BuildRequires:  rubygem(yast-rake)
 # for tests
-BuildRequires:  rubygem-rspec
+BuildRequires:  rubygem(rspec)
 
 Summary:        YaST2 - IO Channel management
 Group:          System/YaST
