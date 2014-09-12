@@ -42,13 +42,12 @@ describe IOChannel::Channels do
         with(bash_path, "lscss").
         and_return (bash_output)
 
-      expect(IOChannel::Channels.allowed.size).to be == 1199
+      expect(IOChannel::Channels.allowed).to have(1199).items
     end
   end
 
   describe "#block" do
-    def channels
-      devices = ["0.0.0100","0.0.0200"]
+    def channels(devices)
       channels = devices.map { |d| IOChannel::Channel.new d }
       channels = IOChannel::Channels.new channels
     end
@@ -64,7 +63,19 @@ describe IOChannel::Channels do
         once.
         and_return(bash_output)
 
-      channels.block
+      devices = ["0.0.0100","0.0.0200"]
+      channels(devices).block
+    end
+
+    it "do nothing if there is no channel" do
+      bash_output = {
+        "exit"   => 0,
+        "stderr" => "",
+        "stdout" => ""
+      }
+      expect(Yast::SCR).to receive(:Execute).never
+
+      channels([]).block
     end
 
     it "raise RuntimeError if cio_ignore failed" do
@@ -78,7 +89,8 @@ describe IOChannel::Channels do
         once.
         and_return(bash_output)
 
-      expect{channels.block}.to raise_error(RuntimeError)
+      devices = ["0.0.0100","0.0.0200"]
+      expect{channels(devices).block}.to raise_error(RuntimeError)
     end
   end
 
