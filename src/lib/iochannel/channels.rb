@@ -46,6 +46,8 @@ module IOChannel
     end
 
     def block
+      return if @channels.empty?
+
       cmd = "cio_ignore -a #{@channels.map(&:device).join(",")}"
 
       result = Yast::SCR.Execute(BASH_SCR_PATH, cmd)
@@ -53,6 +55,7 @@ module IOChannel
     end
 
     def unblock
+      return if @channels.empty?
       cmd = "cio_ignore -r #{@channels.map(&:device).join(",")}"
 
       result = Yast::SCR.Execute(BASH_SCR_PATH, cmd)
