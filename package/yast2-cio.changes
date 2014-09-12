@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Sep 12 13:35:22 UTC 2014 - jreidinger@suse.com
+
+- do not crash if blacklisting empty selection (bnc#896468)
+- 3.1.6
+
+-------------------------------------------------------------------
 Thu Sep  4 12:16:17 UTC 2014 - mvidner@suse.com
 
 - Use a more flexible rubygem requirement syntax (bnc#895069)
