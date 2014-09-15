@@ -20,10 +20,13 @@
 
 require_relative "spec_helper"
 
-require "iochannel/channels"
 require "iochannel/channel"
 
-describe IOChannel::Channels do
+describe "IOChannel::Channels" do
+  before :all do
+    stub_yast_require
+    require "iochannel/channels"
+  end
 
   def bash_path
     IOChannel::Channels::BASH_SCR_PATH

@@ -19,10 +19,14 @@
 
 
 require_relative "spec_helper"
+require_relative "yast_stubs"
 
-require "iochannel/channels_dialog"
+describe "IOChannel::ChannelsDialog" do
+  before :all do
+    stub_yast_require
+    require "iochannel/channels_dialog"
+  end
 
-describe IOChannel::ChannelsDialog do
   LSCSS_OUTPUT = File.read(File.expand_path("../data/lscss.txt", __FILE__))
 
   def mock_success_lscss
