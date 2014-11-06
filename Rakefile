@@ -26,5 +26,5 @@ Yast::Tasks.configuration do |conf|
   conf.obs_api = "https://api.suse.de/"
   conf.obs_project = "Devel:YaST:SLE-12"
   conf.obs_sr_project = "SUSE:SLE-12:Update"
-  conf.obs_target = "SLE-12"
+  conf.obs_target = "SLE_12"
 end
