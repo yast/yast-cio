@@ -23,8 +23,6 @@ require_relative "spec_helper"
 require "iochannel/channels_dialog"
 
 describe IOChannel::ChannelsDialog do
-  LSCSS_OUTPUT = File.read(File.expand_path("../data/lscss.txt", __FILE__))
-
   def mock_success_lscss
     bash_output = {
       "exit"   => 0,
@@ -78,7 +76,7 @@ describe IOChannel::ChannelsDialog do
     mock_success_lscss
     mock_dialog :input => [:clear, :ok]
 
-    Yast::UI.should_receive(:ChangeWidget).
+    expect(Yast::UI).to receive(:ChangeWidget).
       with(:channels_table, :SelectedItems, [])
 
     IOChannel::ChannelsDialog.run
@@ -88,7 +86,7 @@ describe IOChannel::ChannelsDialog do
     mock_success_lscss
     mock_dialog :input => [:select_all, :ok]
 
-    Yast::UI.should_receive(:ChangeWidget) do |id, attr, value|
+    expect(Yast::UI).to receive(:ChangeWidget) do |id, attr, value|
       expect(id).to eq :channels_table
       expect(attr).to eq :SelectedItems
       expect(value.size).to be > 2 # non trivial size but do not tight it with test data
