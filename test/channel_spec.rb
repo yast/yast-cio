@@ -35,17 +35,17 @@ describe IOChannel::Channel do
 
   describe "#initialize" do
     it "raises exception if device is nil" do
-      expect{channel(:device => nil)}.to raise_error
+      expect{channel(:device => nil)}.to raise_error(RuntimeError)
     end
   end
 
   describe "#used?" do
     it "returns true if channel is used" do
-      expect(channel(:used => true).used?).to be_true
+      expect(channel(:used => true).used?).to eq true
     end
 
     it "returns false if channel is not used" do
-      expect(channel(:used => false).used?).to be_false
+      expect(channel(:used => false).used?).to eq false
     end
 
   end

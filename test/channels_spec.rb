@@ -30,8 +30,6 @@ describe IOChannel::Channels do
   end
 
   describe ".allowed" do
-    LSCSS_OUTPUT = File.read(File.expand_path("../data/lscss.txt", __FILE__))
-
     it "loads available channels on system" do
       bash_output = {
         "exit"   => 0,
@@ -42,7 +40,7 @@ describe IOChannel::Channels do
         with(bash_path, "lscss").
         and_return (bash_output)
 
-      expect(IOChannel::Channels.allowed).to have(1199).items
+      expect(IOChannel::Channels.allowed.size).to eq 1199
     end
   end
 
