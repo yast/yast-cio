@@ -67,4 +67,4 @@ rake install DESTDIR="%{buildroot}"
 %{yast_dir}/lib/iochannel
 %{yast_desktopdir}/cio.desktop
 
-%doc COPYING
+%doc COPYING README.md
