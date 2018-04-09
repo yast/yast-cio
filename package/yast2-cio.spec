@@ -24,7 +24,7 @@
 ######################################################################
 
 Name:           yast2-cio
-Version:        3.1.8
+Version:        4.0.0
 Release:        0
 BuildArch:      noarch
 
