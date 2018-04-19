@@ -24,7 +24,7 @@
 ######################################################################
 
 Name:           yast2-cio
-Version:        4.0.0
+Version:        4.0.1
 Release:        0
 ExclusiveArch:  s390 s390x
 

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr 19 13:07:04 UTC 2018 - jreidinger@suse.com
+
+- make package s390 only as it is useless elsewhere (bsc#1089178)
+- 4.0.1
+
+-------------------------------------------------------------------
 Fri Apr  6 18:50:39 UTC 2018 - mfilka@suse.com
 
 - bnc#1087957 - version bump
