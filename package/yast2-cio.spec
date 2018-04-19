@@ -24,9 +24,9 @@
 ######################################################################
 
 Name:           yast2-cio
-Version:        4.0.0
+Version:        4.0.1
 Release:        0
-BuildArch:      noarch
+ExclusiveArch:  s390 s390x
 
 BuildRoot:      %{_tmppath}/%{name}-build
 Source0:        %{name}-%{version}.tar.bz2
