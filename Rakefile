@@ -18,6 +18,9 @@
 
 require "yast/rake"
 
+# do nothing in osc:build as it can be built exclusively on s390
+Rake::Task["osc:build"].clear_actions if `uname --machine` !~ /s390/
+
 Yast::Tasks.configuration do |conf|
   conf.skip_license_check << /lscss.output.*/
   # desktop files are just metadata
