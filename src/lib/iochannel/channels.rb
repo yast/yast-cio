@@ -46,20 +46,11 @@ module IOChannel
     end
 
     def block
-      return if @channels.empty?
-
-      cmd = "cio_ignore -a #{@channels.map(&:device).join(",")}"
-
-      result = Yast::SCR.Execute(BASH_SCR_PATH, cmd)
-      raise "Calling cio_ignore failed with #{result["stderr"]}" unless result["exit"].zero?
+      call_ignore("-a")
     end
 
     def unblock
-      return if @channels.empty?
-      cmd = "cio_ignore -r #{@channels.map(&:device).join(",")}"
-
-      result = Yast::SCR.Execute(BASH_SCR_PATH, cmd)
-      raise "Calling cio_ignore failed with #{result["stderr"]}" unless result["exit"].zero?
+      call_ignore("-r")
     end
 
   private
@@ -72,6 +63,24 @@ module IOChannel
         device = line[/^[\h.]+/]
         used = line.include?("yes")
         Channel.new(device, used)
+      end
+    end
+
+    # number of entries that can fit into one command line run (see bsc#1096033)
+    CHUNK_SIZE = 500
+
+    def call_ignore(option)
+      return if @channels.empty?
+
+      # split channels into chunks, so it can run on cmdline
+      # and then map it back chunk delimeter and index out of it
+      channels_chunks = @channels.each_with_index.chunk{ |d, i| i/CHUNK_SIZE }
+        .map { |i| i[1].map(&:first) }
+      channels_chunks.each do |channels|
+        cmd = "cio_ignore #{option} #{channels.map(&:device).join(",")}"
+
+        result = Yast::SCR.Execute(BASH_SCR_PATH, cmd)
+        raise "Calling cio_ignore failed with #{result["stderr"]}" unless result["exit"].zero?
       end
     end
   end

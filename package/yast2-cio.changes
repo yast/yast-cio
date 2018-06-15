@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jun 15 14:41:21 UTC 2018 - jreidinger@suse.com
+
+- fix invoking shell with too many channels (bsc#1096033)
+- 4.0.2
+
+-------------------------------------------------------------------
 Thu Apr 19 13:07:04 UTC 2018 - jreidinger@suse.com
 
 - make package s390 only as it is useless elsewhere (bsc#1089178)
