@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jun 15 14:41:21 UTC 2018 - jreidinger@suse.com
+
+- fix invoking shell with too many channels (bsc#1096033)
+- 3.1.9
+
+-------------------------------------------------------------------
 Fri Jul 31 11:55:51 UTC 2015 - jreidinger@suse.com
 
 - fix building with new rspec
