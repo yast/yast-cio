@@ -1,1 +1,5 @@
 /package/*.tar.bz2
+cio.pot
+/doc
+/.yardoc
+
