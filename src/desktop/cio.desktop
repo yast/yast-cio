@@ -13,7 +13,7 @@ X-SuSE-YaST-AutoInst=
 X-SuSE-YaST-Geometry=
 X-SuSE-YaST-SortKey=
 X-SuSE-YaST-AutoInstResource=
-X-SuSE-YaST-Keywords=blacklist,io,channels,system
+X-SuSE-YaST-Keywords=blacklist,io,channels,system,s390,cio_ignore,zconf
 
 Icon=yast-powertweak
 Exec=xdg-su -c "/sbin/yast2 cio"
