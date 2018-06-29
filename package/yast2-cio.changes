@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jun 28 10:43:34 CEST 2018 - schubi@suse.de
+
+- Added additional searchkeys to desktop file (fate#321043).
+- 4.0.3
+
+-------------------------------------------------------------------
 Fri Jun 15 14:41:21 UTC 2018 - jreidinger@suse.com
 
 - fix invoking shell with too many channels (bsc#1096033)
