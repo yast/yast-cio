@@ -46,7 +46,7 @@ BuildRequires:  rubygem(rspec)
 
 Summary:        YaST2 - IO Channel management
 Group:          System/YaST
-License:        GPL-2.0 or GPL-3.0
+License:        GPL-2.0-only or GPL-3.0-only
 Url:            https://github.com/yast/yast-cio
 
 %description
