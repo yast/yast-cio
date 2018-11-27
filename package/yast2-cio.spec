@@ -71,7 +71,7 @@ rm -f $RPM_BUILD_ROOT/%{yast_docdir}/COPYING
 %{yast_dir}/clients/*.rb
 %{yast_dir}/lib/iochannel
 %{yast_desktopdir}/cio.desktop
-%{_datadir}/icons/*
+%{yast_icondir}
 
 %doc README.md
 %license COPYING
