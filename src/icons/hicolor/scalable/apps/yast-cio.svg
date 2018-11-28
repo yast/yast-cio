@@ -1,30 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg version="1.1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<defs>
-<linearGradient id="b" x1="11" x2="26" y1="12" y2="12" gradientTransform="scale(4)" gradientUnits="userSpaceOnUse">
-<stop stop-color="#f6f5f4" offset="0"/>
-<stop stop-color="#deddda" offset="1"/>
-</linearGradient>
-<linearGradient id="a" x1="11" x2="26" y1="13.5" y2="13.5" gradientTransform="scale(4)" gradientUnits="userSpaceOnUse">
-<stop stop-color="#c0bfbc" offset="0"/>
-<stop stop-color="#c0bfbc" offset=".8"/>
-<stop stop-color="#deddda" offset=".93333"/>
-<stop stop-color="#c0bfbc" offset="1"/>
-</linearGradient>
-</defs>
-<g transform="matrix(2,0,0,2,0,32)">
-<path d="m16 32c-1.108 0-2 0.99111-2 2.2222v5.5556c0 1.2311 0.892 2.2222 2 2.2222h32c1.108 0 2-0.99111 2-2.2222v-5.5556c0-1.2311-0.892-2.2222-2-2.2222z" fill="#5e5c64"/>
-<path d="m16 30c-1.108 0-2 0.99111-2 2.2222v5.5556c0 1.2311 0.892 2.2222 2 2.2222h32c1.108 0 2-0.99111 2-2.2222v-5.5556c0-1.2311-0.892-2.2222-2-2.2222z" fill="#9a9996"/>
-<path d="m6-6c-1.108 0-2 0.91487-2 2.0513v35.897c0 1.1364 0.892 2.0513 2 2.0513h52c1.108 0 2-0.91487 2-2.0513v-35.897c0-1.1364-0.892-2.0513-2-2.0513z" fill="#5e5c64"/>
-<path transform="translate(0,-16)" d="m6 8c-1.108 0-2 0.892-2 2v36c0 1.108 0.892 2 2 2h52c1.108 0 2-0.892 2-2v-36c0-1.108-0.892-2-2-2z" fill="#9a9996"/>
-<rect x="6" y="-6" width="52" height="36" ry="0" fill="#3d3846"/>
-<rect x="8" y="-4" width="48" height="32" ry="0" fill="#241f31"/>
-<path d="m8-4h36l-8 32h-28z" fill="#fff" opacity=".2"/>
-</g>
-<rect x="24" y="40" width="20" height="24" fill="#c0bfbc"/>
-<rect x="24" y="64" width="20" height="4" fill="#9a9996"/>
-<rect x="32" y="56" width="4" height="4" fill="#9a9996"/>
-<rect x="32" y="44" width="4" height="4" fill="#9a9996"/>
-<path d="m88 32c-8.864 0-16 7.136-16 16v12c0 1.3898 0.22468 2.716 0.55469 4h-28.555v12h44c8.864 0 16-7.136 16-16v-12c0-8.864-7.136-16-16-16z" fill="url(#a)"/>
-<path d="m44 32v32h44c8.864 0 16-7.136 16-16s-7.136-16-16-16z" fill="url(#b)"/>
+<svg version="1.1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+<path d="m32 96c-2.216 0-4 1.9822-4 4.4444v11.111c0 2.4622 1.784 4.4444 4 4.4444h64c2.216 0 4-1.9822 4-4.4444v-11.111c0-2.4622-1.784-4.4444-4-4.4444z" fill="#5e5c64" stroke-width="2"/>
+<path d="m32 92c-2.216 0-4 1.9822-4 4.4444v11.111c0 2.4622 1.784 4.4444 4 4.4444h64c2.216 0 4-1.9822 4-4.4444v-11.111c0-2.4622-1.784-4.4444-4-4.4444z" fill="#9a9996" stroke-width="2"/>
+<path d="m12 20c-2.216 0-4 1.8297-4 4.1026v71.794c0 2.2728 1.784 4.1026 4 4.1026h104c2.216 0 4-1.8297 4-4.1026v-71.794c0-2.2728-1.784-4.1026-4-4.1026z" fill="#5e5c64" stroke-width="2"/>
+<path d="m12 16c-2.216 0-4 1.784-4 4v72c0 2.216 1.784 4 4 4h104c2.216 0 4-1.784 4-4v-72c0-2.216-1.784-4-4-4z" fill="#9a9996" stroke-width="2"/>
+<rect x="12" y="20" width="104" height="72" ry="0" fill="#3d3846" stroke-width="2"/>
+<rect x="16" y="24" width="96" height="64" ry="0" fill="#241f31" stroke-width="2"/>
+<path d="m16 24h72l-16 64h-56z" fill="#fff" opacity=".2" stroke-width="2"/>
+<rect x="32" y="36" width="8" height="40" fill="#2ec27e"/>
+<path d="m56 76 12-40h4l-12 40z" fill="#fff"/>
+<path d="m92 36c-6.648 0-12 5.352-12 12v16c0 6.648 5.352 12 12 12s12-5.352 12-12v-16c0-6.648-5.352-12-12-12zm0 8c2.216 0 4 1.784 4 4v16c0 2.216-1.784 4-4 4s-4-1.784-4-4v-16c0-2.216 1.784-4 4-4z" fill="#e01b24"/>
 </svg>
