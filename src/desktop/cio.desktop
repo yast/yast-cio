@@ -15,7 +15,7 @@ X-SuSE-YaST-SortKey=
 X-SuSE-YaST-AutoInstResource=
 X-SuSE-YaST-Keywords=blacklist,io,channels,system,s390,cio_ignore,zconf
 
-Icon=yast-powertweak
+Icon=yast-cio
 Exec=xdg-su -c "/sbin/yast2 cio"
 
 Name=IO Channels

@@ -25,4 +25,5 @@ Yast::Tasks.configuration do |conf|
   conf.skip_license_check << /lscss.output.*/
   # desktop files are just metadata
   conf.skip_license_check << /.*desktop$/
+  conf.skip_license_check << /.*svg$/
 end

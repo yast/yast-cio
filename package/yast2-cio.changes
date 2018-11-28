@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Nov 25 17:20:40 UTC 2018 - Stasiek Michalski <hellcp@mailbox.org>
+
+- Provide icon with module (boo#1109310)
+- 4.1.0
+
+-------------------------------------------------------------------
 Wed Aug 22 16:52:19 CEST 2018 - schubi@suse.de
 
 - Switched license in spec file from SPDX2 to SPDX3 format.

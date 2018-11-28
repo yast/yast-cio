@@ -24,7 +24,7 @@
 ######################################################################
 
 Name:           yast2-cio
-Version:        4.0.3
+Version:        4.1.0
 Release:        0
 ExclusiveArch:  s390 s390x
 
@@ -71,6 +71,7 @@ rm -f $RPM_BUILD_ROOT/%{yast_docdir}/COPYING
 %{yast_dir}/clients/*.rb
 %{yast_dir}/lib/iochannel
 %{yast_desktopdir}/cio.desktop
+%{yast_icondir}
 
 %doc README.md
 %license COPYING
