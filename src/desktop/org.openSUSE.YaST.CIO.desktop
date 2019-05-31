@@ -18,6 +18,7 @@ X-SuSE-YaST-Keywords=blacklist,io,channels,system,s390,cio_ignore,zconf
 Icon=yast-cio
 Exec=xdg-su -c "/sbin/yast2 cio"
 
-Name=IO Channels
-GenericName=Blacklist IO Channels
+Name=YaST IO Channels
+GenericName=IO Channels
+Comment=Blacklist IO Channels
 StartupNotify=true
