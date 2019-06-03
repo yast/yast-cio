@@ -12,7 +12,7 @@
 # license that conforms to the Open Source Definition (Version 1.9)
 # published by the Open Source Initiative.
 
-# Please submit bugfixes or comments via http://bugs.opensuse.org/
+# Please submit bugfixes or comments via https://bugs.opensuse.org/
 #
 
 
@@ -24,54 +24,48 @@
 ######################################################################
 
 Name:           yast2-cio
-Version:        4.1.0
+Version:        4.2.0
 Release:        0
-ExclusiveArch:  s390 s390x
+Summary:        YaST2 - IO Channel management
+Group:          System/YaST
+License:        GPL-2.0-only or GPL-3.0-only
+Url:            https://github.com/yast/yast-cio
 
-BuildRoot:      %{_tmppath}/%{name}-build
 Source0:        %{name}-%{version}.tar.bz2
-
-Requires:       yast2 >= 3.0.5
-Requires:       yast2-ruby-bindings >= 1.2.0
-Requires:       s390-tools
 
 BuildRequires:  update-desktop-files
 BuildRequires:  yast2-ruby-bindings >= 1.2.0
-BuildRequires:  yast2-devtools >= 1.2.0
+BuildRequires:  yast2-devtools >= 4.2.2
 BuildRequires:  yast2 >= 3.0.5
 #for install task
 BuildRequires:  rubygem(yast-rake)
 # for tests
 BuildRequires:  rubygem(rspec)
 
-Summary:        YaST2 - IO Channel management
-Group:          System/YaST
-License:        GPL-2.0-only or GPL-3.0-only
-Url:            https://github.com/yast/yast-cio
+Requires:       yast2 >= 3.0.5
+Requires:       yast2-ruby-bindings >= 1.2.0
+Requires:       s390-tools
+
+ExclusiveArch:  s390 s390x
 
 %description
 Provides interface for blacklisting and unblocking IO channels
 
 %prep
-%setup -n %{name}-%{version}
+%setup -q
 
 %check
-rake test:unit
+%yast_check
 
 %install
-rake install DESTDIR="%{buildroot}"
-
-# Remove the license from the /usr/share/doc/packages directory,
-# it is also included in the /usr/share/licenses directory by using
-# the %license tag.
-rm -f $RPM_BUILD_ROOT/%{yast_docdir}/COPYING
+%yast_install
+%yast_metainfo
 
 %files
-%defattr(-,root,root)
-%{yast_dir}/clients/*.rb
-%{yast_dir}/lib/iochannel
-%{yast_desktopdir}/cio.desktop
+%{yast_clientdir}
+%{yast_libdir}
+%{yast_desktopdir}
+%{yast_metainfodir}
 %{yast_icondir}
-
 %doc README.md
 %license COPYING
