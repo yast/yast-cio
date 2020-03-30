@@ -46,6 +46,8 @@ Requires:       yast2 >= 3.0.5
 Requires:       yast2-ruby-bindings >= 1.2.0
 Requires:       s390-tools
 
+Supplements:    yast2-s390
+
 ExclusiveArch:  s390 s390x
 
 %description
