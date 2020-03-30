@@ -24,7 +24,7 @@
 ######################################################################
 
 Name:           yast2-cio
-Version:        4.2.1
+Version:        4.2.2
 Release:        0
 Summary:        YaST2 - IO Channel management
 Group:          System/YaST
@@ -45,6 +45,8 @@ BuildRequires:  rubygem(%{rb_default_ruby_abi}:rspec)
 Requires:       yast2 >= 3.0.5
 Requires:       yast2-ruby-bindings >= 1.2.0
 Requires:       s390-tools
+
+Supplements:    yast2-s390
 
 ExclusiveArch:  s390 s390x
 
