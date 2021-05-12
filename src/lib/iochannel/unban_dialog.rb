@@ -20,13 +20,14 @@ require "iochannel/channels"
 require "iochannel/channel_range"
 require "yast"
 
+require "yui"
+
 module IOChannel
   class UnbanDialog
-    include Yast::UIShortcuts
     include Yast::I18n
+    include Yast::Logger
 
     def self.run
-      Yast.import "UI"
       Yast.import "Label"
 
       dialog = UnbanDialog.new
@@ -36,38 +37,47 @@ module IOChannel
     def run
       textdomain "cio"
 
-      raise "Failed to create dialog" unless create_dialog
+      log.info "creating dialog"
+      dialog = create_dialog
+      log.info "dialog created #{dialog.inspect}"
+      raise "Failed to create dialog" unless dialog
 
       begin
-        return controller_loop
+        return controller_loop(dialog)
       ensure
-        close_dialog
+        dialog.destroy
       end
     end
 
   private
+
+    def ui_factory
+      Yui::YUI::widget_factory
+    end
+
     def create_dialog
-      Yast::UI.OpenDialog dialog_content
+      @dialog = ui_factory.create_dialog(Yui::YPopupDialog)
+      dialog_content(@dialog)
+      @dialog
     end
 
-    def close_dialog
-      Yast::UI.CloseDialog
-    end
-
-    def controller_loop
+    def controller_loop(dialog)
       while true do
-        input = Yast::UI.UserInput
-        case input
-        when :ok
+        input = dialog.wait_for_event
+        log.info input.inspect
+        return nil if input.event_type == Yui::YEvent::CancelEvent
+
+        case input.widget
+        when @ok_button
           begin
-            channel_range_value = Yast::UI.QueryWidget(:channel_range, :Value)
+            channel_range_value = @input_field.value
             range = ChannelRange.from_string channel_range_value
           rescue InvalidRangeValue => e
             invalid_range_message(e.value)
           else
             return range.matching_channels
           end
-        when :cancel
+        when @cancel_button
           return nil
         else
           raise "Unknown action #{input}"
@@ -78,37 +88,40 @@ module IOChannel
     def invalid_range_message value
       # TRANSLATORS: %s stands for the smallest snippet inside which we detect syntax error
       msg = _("Specified range is invalid. Wrong value is inside snippet '%s'") % value
-      widget = Label(msg)
-      Yast::UI.ReplaceWidget(:message, widget)
+      # This is what ycp-ui-bindings does - remove old child, add new one, show it, recalculate dialog and re-resolve shortcuts
+      @replace_point.delete_children
+      widget = ui_factory.create_label(@replace_point, msg)
+      @replace_point.show_child
+      @dialog.set_initial_size
+      @dialog.check_shortcuts
     end
 
-    def dialog_content
-      VBox(
-        heading,
-        *unban_content,
-        ending_buttons
-      )
+    def dialog_content(parent)
+      vbox = ui_factory.create_vbox(parent)
+
+      heading(vbox)
+      unban_content(vbox)
+      ending_buttons(vbox)
     end
 
-    def ending_buttons
-      HBox(
-        PushButton(Id(:ok), Yast::Label.OKButton),
-        PushButton(Id(:cancel), Yast::Label.CancelButton)
-      )
+    def ending_buttons(parent)
+      hbox = ui_factory.create_hbox(parent)
+
+      @ok_button = ui_factory.create_push_button(hbox, Yast::Label.OKButton)
+      @cancel_button = ui_factory.create_push_button(hbox, Yast::Label.CancelButton)
     end
 
-    def heading
-      Heading(_("Unban Input/Output Channels"))
+    def heading(parent)
+      ui_factory.create_heading(parent, _("Unban Input/Output Channels"))
     end
 
-    def unban_content
-      [
-        Label(_("List of ranges of channels to unban separated by comma.\n"+
+    def unban_content(parent)
+      ui_factory.create_label(parent, _("List of ranges of channels to unban separated by comma.\n"+
           "Range can be channel, part of channel which will be filled to zero or range specified with dash.\n"+
-          "Example value: 0.0.0001, AA00, 0.1.0100-200")),
-        ReplacePoint(Id(:message), Empty()),
-        InputField(Id(:channel_range), _("Ranges to Unban."), "")
-      ]
+          "Example value: 0.0.0001, AA00, 0.1.0100-200"))
+      @replace_point = ui_factory.create_replace_point(parent)
+      ui_factory.create_empty(@replace_point)
+      @input_field = ui_factory.create_input_field(parent, _("Ranges to Unban."))
     end
   end
 end
