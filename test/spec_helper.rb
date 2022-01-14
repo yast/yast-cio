@@ -20,6 +20,14 @@ $:.unshift(File.expand_path("../../src/lib", __FILE__))
 
 LSCSS_OUTPUT = File.read(File.expand_path("../data/lscss.txt", __FILE__))
 
+# configure RSpec
+RSpec.configure do |config|
+  config.mock_with :rspec do |c|
+    # https://relishapp.com/rspec/rspec-mocks/v/3-0/docs/verifying-doubles/partial-doubles
+    c.verify_partial_doubles = true
+  end
+end
+
 if ENV["COVERAGE"]
   require "simplecov"
   SimpleCov.start do
