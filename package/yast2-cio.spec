@@ -24,7 +24,7 @@
 ######################################################################
 
 Name:           yast2-cio
-Version:        4.4.0
+Version:        4.5.0
 Release:        0
 Summary:        YaST2 - IO Channel management
 Group:          System/YaST
