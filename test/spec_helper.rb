@@ -18,6 +18,8 @@
 
 $:.unshift(File.expand_path("../../src/lib", __FILE__))
 
+require "yast"
+
 LSCSS_OUTPUT = File.read(File.expand_path("../data/lscss.txt", __FILE__))
 
 # configure RSpec
