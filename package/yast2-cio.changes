@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Sep 01 19:57:03 UTC 2023 - Josef Reidinger <jreidinger@suse.com>
+
+- Branch package for SP6 (bsc#1208913)
+
+-------------------------------------------------------------------
 Thu Apr 28 14:04:08 UTC 2022 - Ladislav Slezák <lslezak@suse.cz>
 
 - Fixed unit test failure in Tumbleweed (Ruby 3.1) (bsc#1198982)
