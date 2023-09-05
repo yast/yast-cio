@@ -11,8 +11,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        distro:  [ "tumbleweed", "leap_latest" ]
 
     container:
       image: registry.opensuse.org/yast/sle-15/sp6/containers/yast-ruby
@@ -34,8 +32,6 @@ jobs:
 
     # send the coverage report to coveralls.io
     - name: Coveralls Report
-      # send it only from the TW build to avoid duplicate submits
-      if: ${{ matrix.distro == 'tumbleweed' }}
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -58,8 +54,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        distro:  [ "tumbleweed", "leap_latest" ]
 
     container:
       image: registry.opensuse.org/yast/sle-15/sp6/containers/yast-ruby
@@ -85,8 +79,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        distro: [ "leap_latest" ]
 
     container:
       image: registry.opensuse.org/yast/sle-15/sp6/containers/yast-ruby
@@ -106,8 +98,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        distro: [ "leap_latest" ]
 
     container:
       image: registry.opensuse.org/yast/sle-15/sp6/containers/yast-ruby
