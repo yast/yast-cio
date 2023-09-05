@@ -23,7 +23,7 @@ require "fileutils"
 orig_dir = File.expand_path("../../data", __FILE__)
 data_file = "#{orig_dir}/lscss.output"
 
-if !File.exists? data_file
+if !File.exist? data_file
   FileUtils.cp "#{orig_dir}/lscss.output.orig", data_file
 end
 
