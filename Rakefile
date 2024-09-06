@@ -18,7 +18,7 @@
 
 require "yast/rake"
 
-Yast::Tasks.submit_to :sle15sp6
+Yast::Tasks.submit_to :sle15sp7
 
 # do nothing in osc:build as it can be built exclusively on s390
 Rake::Task["osc:build"].clear_actions if `uname --machine` !~ /s390/
