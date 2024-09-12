@@ -1,7 +1,7 @@
 #
-# spec file for package yast2-services-manager
+# spec file for package yast2-cio
 #
-# Copyright (c) 2013 SUSE LINUX Products GmbH, Nuernberg, Germany.
+# Copyright (c) 2023 SUSE LLC
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -28,23 +28,23 @@ Version:        4.6.1
 Release:        0
 Summary:        YaST2 - IO Channel management
 Group:          System/YaST
-License:        GPL-2.0-only or GPL-3.0-only
-Url:            https://github.com/yast/yast-cio
+License:        GPL-2.0-only OR GPL-3.0-only
+URL:            https://github.com/yast/yast-cio
 
 Source0:        %{name}-%{version}.tar.bz2
 
 BuildRequires:  update-desktop-files
-BuildRequires:  yast2-ruby-bindings >= 1.2.0
-BuildRequires:  yast2-devtools >= 4.2.2
 BuildRequires:  yast2 >= 3.0.5
+BuildRequires:  yast2-devtools >= 4.2.2
+BuildRequires:  yast2-ruby-bindings >= 1.2.0
 #for install task
 BuildRequires:  rubygem(%{rb_default_ruby_abi}:yast-rake)
 # for tests
 BuildRequires:  rubygem(%{rb_default_ruby_abi}:rspec)
 
+Requires:       s390-tools
 Requires:       yast2 >= 3.0.5
 Requires:       yast2-ruby-bindings >= 1.2.0
-Requires:       s390-tools
 
 Supplements:    yast2-s390
 
@@ -71,3 +71,5 @@ Provides interface for blacklisting and unblocking IO channels
 %{yast_icondir}
 %doc README.md
 %license COPYING
+
+%changelog
