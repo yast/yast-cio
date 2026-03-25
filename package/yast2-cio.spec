@@ -24,7 +24,7 @@
 ######################################################################
 
 Name:           yast2-cio
-Version:        5.0.0
+Version:        5.0.1
 Release:        0
 Summary:        YaST2 - IO Channel management
 Group:          System/YaST
@@ -33,7 +33,6 @@ Url:            https://github.com/yast/yast-cio
 
 Source0:        %{name}-%{version}.tar.bz2
 
-BuildRequires:  update-desktop-files
 BuildRequires:  yast2-ruby-bindings >= 1.2.0
 BuildRequires:  yast2-devtools >= 4.2.2
 BuildRequires:  yast2 >= 3.0.5
